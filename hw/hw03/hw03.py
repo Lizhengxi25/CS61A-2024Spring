@@ -29,6 +29,13 @@ def num_eights(n):
     """
     "*** YOUR CODE HERE ***"
 
+    if n <= 0:
+        return 0;
+    elif n % 10 == 8:
+        return num_eights(n // 10) + 1
+    else:
+        return num_eights(n // 10)
+
 
 def digit_distance(n):
     """Determines the digit distance of n.
@@ -51,6 +58,12 @@ def digit_distance(n):
     """
     "*** YOUR CODE HERE ***"
 
+    if n < 10:
+        return 0
+    else:
+        return abs((n % 10) - ((n // 10) % 10)) + digit_distance(n // 10)
+
+k = 0
 
 def interleaved_sum(n, odd_func, even_func):
     """Compute the sum odd_func(1) + even_func(2) + odd_func(3) + ..., up
@@ -72,6 +85,20 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
+
+    def inner_odd (k):
+        if k > n:
+            return 0
+        else:
+            return inner_even (k + 1) + odd_func(k)
+        
+    def inner_even (k):
+        if k > n:
+            return 0
+        else:
+            return inner_odd (k + 1) + even_func(k)
+        
+    return inner_odd(1)
 
 
 def next_larger_coin(coin):
@@ -127,6 +154,20 @@ def count_coins(total):
     """
     "*** YOUR CODE HERE ***"
 
+    def Tree(n, m):
+        if m == None:
+            return 0
+    
+        if (n >= m):
+            ans = 0
+            if n == m:
+                ans = 1
+            return ans + Tree(n - m, m) + Tree(n, next_smaller_coin(m))
+        else:
+            return Tree(n, next_smaller_coin(m))
+            
+    return Tree(total, 25)
+
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""
@@ -176,5 +217,5 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return lambda n: (*range(n), n)
 
