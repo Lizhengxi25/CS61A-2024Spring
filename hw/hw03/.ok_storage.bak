@@ -3,3 +3,4 @@
 'interleaved_sum-correct', (1024, 70)
 'count_coins-correct', (1536, 70)
 'move_stack-correct', (2048, 70)
+'make_anonymous_factorial-correct', (2560, 70)
